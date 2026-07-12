@@ -98,15 +98,13 @@ function sendMessage() {
     // Demo usage limit
     // Demo usage limit
 // Allow users to complete one full demo first.
-if (demoUsed === "true" && weeklyBudget === 0) {
-
+// Demo usage limit
+if (demoUsed === "true") {
     messages.innerHTML += `
         <div class="bot-message">
-            🔒 <b>Demo Limit Reached!</b> 🐰<br><br>
-
-            You have already completed the Budget Bunny website demo.<br><br>
-
-            📱 Please scan the Telegram QR code to continue using the full Budget Bunny chatbot.
+            🔒 Demo Limit Reached! 🐰<br><br>
+            You have already tried Budget Bunny's demo version.<br><br>
+            📱 Scan the Telegram QR code to continue using Budget Bunny for full expense tracking.
         </div>
     `;
 
@@ -185,30 +183,30 @@ if (demoUsed === "true" && weeklyBudget === 0) {
     }
 
     reply = `
-    ✅ <b>Expense Recorded!</b><br><br>
+        ✅ <b>Expense Recorded!</b><br><br>
 
-    💸 Amount: <b>$${value.toFixed(2)}</b><br>
+        💸 Amount: <b>$${value.toFixed(2)}</b><br>
 
-    📊 Remaining Budget: <b>$${remaining.toFixed(2)}</b><br>
+        📊 Remaining Budget: <b>$${remaining.toFixed(2)}</b><br>
 
-    ${budgetAlert}
+        ${budgetAlert}
 
-    <br><br>
+        <br><br>
 
-    🎉 Your demo is now complete!
+        🎉 Your demo is now complete!
 
-    <br><br>
+         <br><br>
 
-    🔒 <b>Demo Limit Reached</b>
+        🔒 <b>Demo Limit Reached</b>
 
-    <br><br>
+        <br><br>
 
-    Thank you for trying Budget Bunny!
+        Thank you for trying Budget Bunny!
 
-    <br><br>
+        <br><br>
 
-    📱 Scan the Telegram QR code to continue using the full chatbot and track all your future expenses.
-`;
+        📱 Scan the Telegram QR code to continue using the full chatbot and track all your future expenses.
+    `;
 
     // Show typing animation
     messages.innerHTML += `
