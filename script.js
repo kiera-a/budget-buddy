@@ -4,7 +4,6 @@
 
 let weeklyBudget = 0;
 let totalSpent = 0;
-let demoUsed = localStorage.getItem("budgetBuddyDemoUsed") || false;
 
 // =========================
 // Smooth Fade-in Animation
