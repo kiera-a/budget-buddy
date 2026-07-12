@@ -4,6 +4,7 @@
 
 let weeklyBudget = 0;
 let totalSpent = 0;
+let demoUsed = localStorage.getItem("budgetBuddyDemoUsed") || false;
 
 // =========================
 // Smooth Fade-in Animation
@@ -95,21 +96,25 @@ function sendMessage() {
     if (text === "") return;
 
     // Demo usage limit
-    if (demoUsed === "true") {
-        messages.innerHTML += `
-            <div class="bot-message">
-                🔒 Demo Limit Reached! 🐰<br><br>
-                You have already tried Budget Bunny's demo version.<br><br>
-                📱 Scan the Telegram QR code to continue using Budget Bunny for full expense tracking.
-            </div>
-        `;
+    // Demo usage limit
+// Allow users to complete one full demo first.
+if (demoUsed === "true" && weeklyBudget === 0) {
 
-        input.value = "";
-        messages.scrollTop = messages.scrollHeight;
+    messages.innerHTML += `
+        <div class="bot-message">
+            🔒 <b>Demo Limit Reached!</b> 🐰<br><br>
 
-        return;
-    }
+            You have already completed the Budget Bunny website demo.<br><br>
 
+            📱 Please scan the Telegram QR code to continue using the full Budget Bunny chatbot.
+        </div>
+    `;
+
+    input.value = "";
+    messages.scrollTop = messages.scrollHeight;
+
+    return;
+}
     messages.innerHTML += `
         <div class="user-message">
             ${text}
@@ -180,12 +185,30 @@ function sendMessage() {
     }
 
     reply = `
-        ✅ <b>Expense Recorded!</b><br><br>
-        💸 Amount: <b>$${value.toFixed(2)}</b><br>
-        📊 Remaining Budget: <b>$${remaining.toFixed(2)}</b><br>
-        ${budgetAlert}<br>
-        🎉 Budget updated successfully!
-    `;
+    ✅ <b>Expense Recorded!</b><br><br>
+
+    💸 Amount: <b>$${value.toFixed(2)}</b><br>
+
+    📊 Remaining Budget: <b>$${remaining.toFixed(2)}</b><br>
+
+    ${budgetAlert}
+
+    <br><br>
+
+    🎉 Your demo is now complete!
+
+    <br><br>
+
+    🔒 <b>Demo Limit Reached</b>
+
+    <br><br>
+
+    Thank you for trying Budget Bunny!
+
+    <br><br>
+
+    📱 Scan the Telegram QR code to continue using the full chatbot and track all your future expenses.
+`;
 
     // Show typing animation
     messages.innerHTML += `
